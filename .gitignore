@@ -1,2 +1,9 @@
 .env
 data_dir
+
+# Deployment-specific .env files — never commit these
+*.env.*
+!.env.sample
+!infrastructure/.env.sample
+!infrastructure/.env.net-*
+!*/env.sample
