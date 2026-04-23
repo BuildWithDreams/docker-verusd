@@ -243,10 +243,11 @@ Each chain runs on its own Docker bridge network:
 
 | Chain | Network name |
 |-------|-------------|
+| VRSC | `net-vrsc-blue` |
 | vDEX | `net-vdex-blue` |
-| VRSC | `net-vrsc-blue`, `net-vrsc-green` |
-| vRSCTEST | `dev199` |
-| varrr/chips | `chips_fafstaking` |
+| varrr | `net-varrr-blue` |
+| chips | `net-chips-blue` |
+| vRSCTEST | `net-vrsc-test` |
 
 Networks must exist before starting containers:
 ```bash
@@ -343,11 +344,11 @@ DOCKER_NETWORK_NAME=net-vrsc-blue
 ### Existing networks (reference)
 | Network | Chain | Subnet |
 |---------|-------|--------|
-| net-vrsc-blue | VRSC mainnet | 10.201.0.0/24 |
-| net-vrsc-green | VRSC mainnet (failover) | 10.202.0.0/24 |
+| net-vrsc-blue | VRSC | 10.201.0.0/24 |
+| net-vrsc-test | vRSCTEST | 10.199.0.0/24 |
+| net-varrr-blue | varrr | 10.202.0.0/24 |
 | net-vdex-blue | vDEX | 10.203.0.0/24 |
-| dev199 | vRSCTEST | (from .env) |
-| chips_fafstaking | chips | (from .env) |
+| net-chips-blue | chips | 10.204.0.0/24 |
 
 ### Networks must exist before starting containers
 ```bash
