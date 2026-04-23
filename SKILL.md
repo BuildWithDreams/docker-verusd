@@ -39,13 +39,16 @@ docker-verusd/
 
 Each chain gets its own Docker bridge network. Networks are defined as Ansible variables and provisioned via `playbooks/03-docker-networks.yml`.
 
-**IP convention per service** (4th octet):
+**IP convention per service** (4th octet, applies to any /24 regardless of chain):
 ```
-.11  verusd daemon
-.12  RPC server
-.13  block explorer
-.14  ID verification service
+.1   = Docker gateway
+.11  = verusd daemon
+.12  = RPC server (future)
+.13  = block explorer (future)
+.14  = ID verification service (future)
+...  = other network services (enumerable uniformly)
 ```
+Same convention for VRSC, vDEX, varrr, chips — any chain, any /24.
 
 **Network naming:** `net-<chain>-<color>` e.g. `net-vrsc-blue`
 **Bridge name:** `br-SP<subnet>` e.g. `br-SP1020101` for `10.201.0.0/24`
@@ -274,15 +277,34 @@ net-<chain>-<color>
 Examples: net-vrsc-blue, net-vrsc-green, net-vdex-blue, net-varrr-blue
 ```
 
-### IP octet assignments (per service)
+### Compose project naming convention
 ```
-.11 = verusd daemon
-.12 = RPC server
-.13 = block explorer
-.14 = ID verification
-.15 = notary service
-... (enumerable uniformly)
+<network>_<color>
 ```
+Container names become `<project_name>-<service>-1`.
+
+| Chain | Project name | Example container |
+|-------|-------------|------------------|
+| VRSC mainnet | `mains_blue` | `mains_blue-vrsc-1` |
+| VRSC mainnet (failover) | `mains_green` | `mains_green-vrsc-1` |
+| vRSCTEST | `test_blue` | `test_blue-vrsc-1` |
+| vDEX PBaaS | `vdex_blue` | `vdex_blue-vdex-1` |
+| varrr PBaaS | `varrr_blue` | `varrr_blue-varrr-1` |
+| chips PBaaS | `chips_blue` | `chips_blue-chips-1` |
+
+Replace `env.sample` in each chain directory with the appropriate project name.
+
+### IP /24 subnet octet assignments (per service, any chain)
+```
+.1   = Docker gateway
+.11  = verusd daemon
+.12  = RPC server
+.13  = block explorer
+.14  = ID verification
+.15  = notary service
+...  (enumerable uniformly)
+```
+**Always the same regardless of chain or subnet.**
 
 ### Bridge name convention
 Bridge names are derived from the subnet's `.1` address, stripped of dots:
