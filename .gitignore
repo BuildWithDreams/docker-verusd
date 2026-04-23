@@ -7,3 +7,4 @@ data_dir
 !infrastructure/.env.sample
 !infrastructure/.env.net-*
 !*/env.sample
+infrastructure/.env.*
