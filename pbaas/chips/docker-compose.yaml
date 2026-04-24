@@ -1,12 +1,12 @@
 services:
   chips:
     hostname: ${VERUSD_HOSTNAME}
-    image: verustrading/verusd:0.1
+    image: buildwithdreams/verusd:1.2.16
     command: verusd -chain=${CHAIN_NAME} ${VERUSD_BOOTSTRAP_FLAG}
     volumes:
       - ./data_dir:/root/.verus/pbaas/${CURRENCYID_HEX}
       #- ./VRSC.conf:/root/.komodo/VRSC/VRSC.conf
-      - /home/${USER}/.zcash-params:/root/.zcash-params:ro
+      - /home/dream-hermes-agent/.zcash-params:/root/.zcash-params:ro
     networks:
       pbaas_network:
         ipv4_address: ${VERUSD_IPV4}
