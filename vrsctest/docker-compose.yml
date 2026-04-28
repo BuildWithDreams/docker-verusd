@@ -1,19 +1,21 @@
 services:
   vrsctest:
     hostname: ${VERUSD_HOSTNAME}
-    image: verustrading/verusd:0.1
-    command: verusd -chain=vrsctest -testnet ${VERUSD_BOOTSTRAP_FLAG} &
+    image: buildwithdreams/verusd:${VERUSD_IMAGE_TAG}
+    command: verusd -chain=VRSCTEST ${VERUSD_BOOTSTRAP_FLAG}
     volumes:
-      - ./data_dir:/root/.komodo/vrsctest
-      - /home/${USER}/.zcash-params:/root/.zcash-params:ro
+      - ./data_dir:/root/.komodo/VRSCTEST
+      - /home/dream-hermes-agent/.zcash-params:/root/.zcash-params:ro
+    ports:
+      - "127.0.0.1:${LOCAL_RPC_PORT}:${VERUSD_RPC_PORT}"
     networks:
-      dev16:
+      pbaas_network:
         ipv4_address: ${VERUSD_IPV4}
     logging:
       driver: "json-file"
     stop_grace_period: 2m
 
 networks:
-  dev16:
+  pbaas_network:
     name: ${DOCKER_NETWORK_NAME}
     external: true
