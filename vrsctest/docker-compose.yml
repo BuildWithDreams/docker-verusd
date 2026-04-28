@@ -4,7 +4,7 @@ services:
     image: buildwithdreams/verusd:${VERUSD_IMAGE_TAG}
     command: verusd -chain=VRSCTEST ${VERUSD_BOOTSTRAP_FLAG}
     volumes:
-      - ./data_dir:/root/.komodo/VRSCTEST
+      - ./data_dir:/root/.komodo/vrsctest
       - /home/dream-hermes-agent/.zcash-params:/root/.zcash-params:ro
     ports:
       - "127.0.0.1:${LOCAL_RPC_PORT}:${VERUSD_RPC_PORT}"
