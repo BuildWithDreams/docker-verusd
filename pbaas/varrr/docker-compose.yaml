@@ -13,6 +13,12 @@ services:
     logging:
       driver: "json-file"
     stop_grace_period: 2m
+    deploy:
+      resources:
+        limits:
+          memory: 12G # Hard limit
+        reservations:
+          memory: 1G # Soft limit
 
 networks:
   pbaas_network:
