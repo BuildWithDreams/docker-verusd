@@ -4,9 +4,10 @@ services:
     image: verustrading/verusd:0.1
     command: verusd -chain=${CHAIN_NAME} ${VERUSD_BOOTSTRAP_FLAG}
     volumes:
-      - ./data_dir:/root/.verus/pbaas/${CURRENCYID_HEX}
-      #- ./VRSC.conf:/root/.komodo/VRSC/VRSC.conf
+      - /home/mylo/.verus/pbaas/${CURRENCYID_HEX}:/root/.verus/pbaas/${CURRENCYID_HEX}
       - /home/${USER}/.zcash-params:/root/.zcash-params:ro
+    ports:
+      - "127.0.0.1:21778:21778"
     networks:
       pbaas_network:
         ipv4_address: ${VERUSD_IPV4}
@@ -24,4 +25,3 @@ networks:
   pbaas_network:
     name: ${DOCKER_NETWORK_NAME}
     external: true
-

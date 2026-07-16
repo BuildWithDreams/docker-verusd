@@ -1,11 +1,11 @@
 services:
   vrsc:
     hostname: ${VERUSD_HOSTNAME}
-    image: verustrading/verusd:0.1
+    image: buildwithdreams/verusd:1.2.16
     command: verusd ${VERUSD_BOOTSTRAP_FLAG}
     volumes:
       - ./data_dir:/root/.komodo/VRSC
-      - /home/${USER}/.zcash-params:/root/.zcash-params:ro
+      - /home/dream-hermes-agent/.zcash-params:/root/.zcash-params:ro
     ports:
       - "127.0.0.1:${LOCAL_RPC_PORT}:${VERUSD_RPC_PORT}"
     networks:
