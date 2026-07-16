@@ -1,1 +1,1 @@
-docker-compose exec -i -t verusd_chips bash
+docker-compose exec -i -t chips bash
