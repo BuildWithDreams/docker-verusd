@@ -1,1 +1,1 @@
-docker-compose exec -i -t vrsctest bash
+docker compose exec -i -t vrsctest bash
